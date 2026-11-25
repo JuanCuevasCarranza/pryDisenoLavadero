@@ -44,15 +44,13 @@
             txtCliente = new TextBox();
             lblCliente = new Label();
             grbImporte = new GroupBox();
-            dgvImporte = new DataGridView();
-            colSubtotal = new DataGridViewTextBoxColumn();
-            colRecargo = new DataGridViewTextBoxColumn();
-            colDescuento = new DataGridViewTextBoxColumn();
-            colTotalPagar = new DataGridViewTextBoxColumn();
+            lblTotal = new Label();
+            lblDescuento = new Label();
+            lblRecargo = new Label();
+            lblSubtotal = new Label();
             grbDatosDeLavado.SuspendLayout();
             grbEntrega.SuspendLayout();
             grbImporte.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvImporte).BeginInit();
             SuspendLayout();
             // 
             // grbDatosDeLavado
@@ -71,34 +69,36 @@
             grbDatosDeLavado.Controls.Add(lblCliente);
             grbDatosDeLavado.Location = new Point(12, 12);
             grbDatosDeLavado.Name = "grbDatosDeLavado";
-            grbDatosDeLavado.Size = new Size(336, 405);
+            grbDatosDeLavado.Size = new Size(336, 410);
             grbDatosDeLavado.TabIndex = 0;
             grbDatosDeLavado.TabStop = false;
             grbDatosDeLavado.Text = "Datos de Lavado";
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(219, 358);
+            btnLimpiar.Location = new Point(231, 364);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(111, 35);
+            btnLimpiar.Size = new Size(99, 35);
             btnLimpiar.TabIndex = 16;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // btnCalcular
             // 
             btnCalcular.Enabled = false;
-            btnCalcular.Location = new Point(6, 358);
+            btnCalcular.Location = new Point(6, 364);
             btnCalcular.Name = "btnCalcular";
-            btnCalcular.Size = new Size(111, 35);
+            btnCalcular.Size = new Size(98, 35);
             btnCalcular.TabIndex = 15;
             btnCalcular.Text = "Calcular";
             btnCalcular.UseVisualStyleBackColor = true;
+            btnCalcular.Click += button1_Click;
             // 
             // chkClienteFrecuente
             // 
             chkClienteFrecuente.AutoSize = true;
-            chkClienteFrecuente.Location = new Point(6, 320);
+            chkClienteFrecuente.Location = new Point(23, 325);
             chkClienteFrecuente.Name = "chkClienteFrecuente";
             chkClienteFrecuente.Size = new Size(173, 19);
             chkClienteFrecuente.TabIndex = 1;
@@ -141,15 +141,17 @@
             // 
             // txtVehiculos
             // 
-            txtVehiculos.Location = new Point(107, 165);
+            txtVehiculos.Location = new Point(121, 165);
+            txtVehiculos.MaxLength = 5;
             txtVehiculos.Name = "txtVehiculos";
             txtVehiculos.Size = new Size(44, 23);
             txtVehiculos.TabIndex = 10;
+            txtVehiculos.KeyPress += txtVehiculos_KeyPress;
             // 
             // lblVehiculos
             // 
             lblVehiculos.AutoSize = true;
-            lblVehiculos.Location = new Point(6, 168);
+            lblVehiculos.Location = new Point(23, 168);
             lblVehiculos.Name = "lblVehiculos";
             lblVehiculos.Size = new Size(92, 15);
             lblVehiculos.TabIndex = 9;
@@ -158,6 +160,7 @@
             // 
             // cmbServicio
             // 
+            cmbServicio.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbServicio.FormattingEnabled = true;
             cmbServicio.Items.AddRange(new object[] { "Lavado Exterior", "Lavado Completo ", "Lavado Con Encerado" });
             cmbServicio.Location = new Point(107, 119);
@@ -190,6 +193,7 @@
             txtPatente.Name = "txtPatente";
             txtPatente.Size = new Size(103, 23);
             txtPatente.TabIndex = 2;
+            txtPatente.KeyPress += txtPatente_KeyPress;
             // 
             // txtCliente
             // 
@@ -209,58 +213,65 @@
             // 
             // grbImporte
             // 
-            grbImporte.Controls.Add(dgvImporte);
-            grbImporte.Location = new Point(12, 423);
+            grbImporte.Controls.Add(lblTotal);
+            grbImporte.Controls.Add(lblDescuento);
+            grbImporte.Controls.Add(lblRecargo);
+            grbImporte.Controls.Add(lblSubtotal);
+            grbImporte.Location = new Point(12, 428);
             grbImporte.Name = "grbImporte";
-            grbImporte.Size = new Size(336, 182);
+            grbImporte.Size = new Size(336, 177);
             grbImporte.TabIndex = 18;
             grbImporte.TabStop = false;
             grbImporte.Text = "Importe";
             // 
-            // dgvImporte
+            // lblTotal
             // 
-            dgvImporte.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvImporte.Columns.AddRange(new DataGridViewColumn[] { colSubtotal, colRecargo, colDescuento, colTotalPagar });
-            dgvImporte.Location = new Point(6, 22);
-            dgvImporte.Name = "dgvImporte";
-            dgvImporte.ReadOnly = true;
-            dgvImporte.Size = new Size(324, 150);
-            dgvImporte.TabIndex = 17;
+            lblTotal.AutoSize = true;
+            lblTotal.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblTotal.Location = new Point(20, 130);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(117, 15);
+            lblTotal.TabIndex = 20;
+            lblTotal.Text = "Total a pagar: $ 0.00";
             // 
-            // colSubtotal
+            // lblDescuento
             // 
-            colSubtotal.HeaderText = "Subtotal";
-            colSubtotal.Name = "colSubtotal";
-            colSubtotal.ReadOnly = true;
+            lblDescuento.AutoSize = true;
+            lblDescuento.Location = new Point(20, 95);
+            lblDescuento.Name = "lblDescuento";
+            lblDescuento.Size = new Size(96, 15);
+            lblDescuento.TabIndex = 19;
+            lblDescuento.Text = "Descuento: $0.00";
             // 
-            // colRecargo
+            // lblRecargo
             // 
-            colRecargo.HeaderText = "Recargo";
-            colRecargo.Name = "colRecargo";
-            colRecargo.ReadOnly = true;
+            lblRecargo.AutoSize = true;
+            lblRecargo.Location = new Point(20, 65);
+            lblRecargo.Name = "lblRecargo";
+            lblRecargo.Size = new Size(83, 15);
+            lblRecargo.TabIndex = 18;
+            lblRecargo.Text = "Recargo: $0.00";
             // 
-            // colDescuento
+            // lblSubtotal
             // 
-            colDescuento.HeaderText = "Descuento";
-            colDescuento.Name = "colDescuento";
-            colDescuento.ReadOnly = true;
-            // 
-            // colTotalPagar
-            // 
-            colTotalPagar.HeaderText = "Total a Pagar";
-            colTotalPagar.Name = "colTotalPagar";
-            colTotalPagar.ReadOnly = true;
+            lblSubtotal.AutoSize = true;
+            lblSubtotal.Location = new Point(20, 35);
+            lblSubtotal.Name = "lblSubtotal";
+            lblSubtotal.Size = new Size(84, 15);
+            lblSubtotal.TabIndex = 17;
+            lblSubtotal.Text = "Subtotal: $0.00";
             // 
             // frmLavados
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLightLight;
+            BackColor = SystemColors.InactiveBorder;
             ClientSize = new Size(359, 609);
             Controls.Add(grbImporte);
             Controls.Add(grbDatosDeLavado);
             ForeColor = SystemColors.ControlText;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "frmLavados";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Lavadero de los Andes - Calculo de Servicio";
@@ -270,7 +281,7 @@
             grbEntrega.ResumeLayout(false);
             grbEntrega.PerformLayout();
             grbImporte.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvImporte).EndInit();
+            grbImporte.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -291,11 +302,10 @@
         private CheckBox chkClienteFrecuente;
         private Button btnLimpiar;
         private Button btnCalcular;
-        private DataGridView dgvImporte;
         private GroupBox grbImporte;
-        private DataGridViewTextBoxColumn colSubtotal;
-        private DataGridViewTextBoxColumn colRecargo;
-        private DataGridViewTextBoxColumn colDescuento;
-        private DataGridViewTextBoxColumn colTotalPagar;
+        private Label lblSubtotal;
+        private Label lblRecargo;
+        private Label lblDescuento;
+        private Label lblTotal;
     }
 }
