@@ -86,7 +86,6 @@
             // 
             // btnCalcular
             // 
-            btnCalcular.Enabled = false;
             btnCalcular.Location = new Point(6, 364);
             btnCalcular.Name = "btnCalcular";
             btnCalcular.Size = new Size(98, 35);
