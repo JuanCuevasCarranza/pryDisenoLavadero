@@ -87,6 +87,7 @@
             // 
             // btnCalcular
             // 
+            btnCalcular.Enabled = false;
             btnCalcular.Location = new Point(6, 358);
             btnCalcular.Name = "btnCalcular";
             btnCalcular.Size = new Size(111, 35);
@@ -223,7 +224,7 @@
             dgvImporte.Location = new Point(6, 22);
             dgvImporte.Name = "dgvImporte";
             dgvImporte.ReadOnly = true;
-            dgvImporte.Size = new Size(312, 150);
+            dgvImporte.Size = new Size(324, 150);
             dgvImporte.TabIndex = 17;
             // 
             // colSubtotal
